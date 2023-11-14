@@ -31,5 +31,6 @@ RecipeCard.propTypes = {
     cookTime: PropTypes.string,
     ingredients: PropTypes.string,
     imgUrl: PropTypes.string,
+    categoryId: PropTypes.number,
   }).isRequired,
 };

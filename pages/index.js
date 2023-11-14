@@ -34,14 +34,14 @@ function Home() {
       {authUser?.firebaseUid === user?.uid ? (
         <>
           <div className="d-flex flex-row justify-content-between">
-            <Link href="/charities/new" passHref>
+            <Link href="/recipes/new" passHref>
               <Button
                 size="md"
                 className="btn-m"
                 style={{
                   backgroundColor: 'transparent', color: 'black', border: 'none', fontWeight: 600,
                 }}
-              >Create
+              >Create a Recipe
               </Button>
             </Link>
           </div>
