@@ -18,8 +18,8 @@ const getRecipes = () => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const getSingleRecipe = () => new Promise((resolve, reject) => {
-  fetch(`${dbUrl}/recipes`, {
+const getSingleRecipe = (id) => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/recipe/${id}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
