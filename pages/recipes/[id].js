@@ -1,11 +1,15 @@
 import { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { deleteSingleRecipe, getSingleRecipe } from '../../api/recipeData';
+// import ReviewBox from '../../components/ReviewBox';
+import ReviewForm from '../../components/ReviewForm';
 
-export default function ViewRecipeDetails() {
+export default function ViewRecipeDetails({ onUpdate }) {
   const [recipeDetails, setRecipeDetails] = useState([]);
+  // const [reviews, setReviews] = useState();
   const router = useRouter();
   const { id } = router.query;
 
@@ -21,7 +25,6 @@ export default function ViewRecipeDetails() {
 
   useEffect(() => {
     getRecipe();
-    console.warn(recipeDetails);
   }, []);
 
   return (
@@ -63,7 +66,12 @@ export default function ViewRecipeDetails() {
             <p>{recipeDetails.directions}</p>
           </div>
         </div>
+        <ReviewForm onUpdate={onUpdate} />
       </div>
     </>
   );
 }
+
+ViewRecipeDetails.propTypes = {
+  onUpdate: PropTypes.func.isRequired,
+};
