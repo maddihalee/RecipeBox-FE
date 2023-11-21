@@ -6,7 +6,7 @@ import { checkUser } from '../utils/auth';
 import getAllCategories from '../api/categoryData';
 import RegisterForm from '../components/RegisterForm';
 import { useAuth } from '../utils/context/authContext';
-import { getRecipes } from '../api/recipeData';
+import { getRecipes, getRecByCategory } from '../api/recipeData';
 import RecipeCard from '../components/RecipeCard';
 
 function Home() {
@@ -14,36 +14,37 @@ function Home() {
   const [authUser, setAuthUser] = useState();
   const [dropdowns, setDropdowns] = useState([]);
   const [recipes, setRecipes] = useState([]);
-  // const [category, setCategory] = useState();
-
-  useEffect(() => {
-    checkUser(user.uid).then((data) => setAuthUser(data[0]));
-  }, []);
-
-  const onUpdate = () => {
-    checkUser(user.uid).then((data) => setAuthUser(data));
-  };
+  // const [selectedOption, setSelectedOption] = useState('');
+  // const [usedata, setUseData] = useState([]);
 
   const getAllRecipes = () => {
     getRecipes().then(setRecipes);
   };
 
   useEffect(() => {
+    checkUser(user.uid).then((data) => setAuthUser(data[0]));
     getAllCategories().then(setDropdowns);
     getAllRecipes();
   }, []);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setDropdowns((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+  const onUpdate = () => {
+    checkUser(user.uid).then((data) => setAuthUser(data));
   };
 
-  const handleClick = () => {
-    recipes.filter((recipe) => recipe.includes());
+  const handleChange = (e) => {
+    if (e.target.value === '') {
+      getAllRecipes().then(setRecipes);
+    } else {
+      getRecByCategory(e.target.value).then(setRecipes);
+    }
   };
+
+  // const handleClick = (e) => {
+  //   e.preventDefault();
+  //   const filteredData = selectedOption === '' ? usedata
+  //     : usedata.filter((item) => item.category === selectedOption);
+
+  // };
 
   return (
     <>
@@ -67,7 +68,6 @@ function Home() {
                 onChange={handleChange}
                 className="mb-3"
                 value={recipes.categoryId}
-                onClick={handleClick}
               >
                 <option value="">Select a Category</option>
                 {

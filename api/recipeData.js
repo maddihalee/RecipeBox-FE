@@ -67,10 +67,29 @@ const deleteSingleRecipe = (id) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getRecByCategory = (category) => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/recipes/category/${category}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data) {
+        resolve(Object.values(data));
+      } else {
+        resolve([]);
+      }
+    })
+    .catch(reject);
+});
+
 export {
   getRecipes,
   getSingleRecipe,
   createRecipe,
   updateRecipe,
   deleteSingleRecipe,
+  getRecByCategory,
 };
