@@ -42,6 +42,18 @@ export default function ViewRecipeDetails({ onUpdate }) {
             EDIT
           </Button>
         </Link>
+        <Link href="/recipes/favorite" passHref>
+          <Button
+            variant="info"
+            style={{
+              backgroundColor: 'transparent',
+              border: 'none',
+              color: 'black',
+            }}
+          >
+            FAVORITE
+          </Button>
+        </Link>
         <Button
           onClick={deleteRecipe}
           style={{
