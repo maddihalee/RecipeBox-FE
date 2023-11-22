@@ -34,7 +34,7 @@ const updateReview = (payload) => new Promise((resolve, reject) => {
     },
     body: JSON.stringify(payload),
   })
-    .then((response) => response.json())
+    .then((response) => response)
     .then(resolve)
     .catch(reject);
 });

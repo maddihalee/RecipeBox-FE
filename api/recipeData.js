@@ -85,6 +85,40 @@ const getRecByCategory = (category) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const favoriteRecipe = (recipeId, userId) => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/recipes/addtofavorites`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      recipeId,
+      userId,
+    }),
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(data))
+    .catch(reject);
+});
+
+const getFavoriteRecipes = (userId) => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/recipes/favorites/${userId}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data) {
+        resolve(Object.values(data));
+      } else {
+        resolve([]);
+      }
+    })
+    .catch(reject);
+});
+
 export {
   getRecipes,
   getSingleRecipe,
@@ -92,4 +126,6 @@ export {
   updateRecipe,
   deleteSingleRecipe,
   getRecByCategory,
+  favoriteRecipe,
+  getFavoriteRecipes,
 };
