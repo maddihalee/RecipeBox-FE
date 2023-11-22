@@ -56,6 +56,17 @@ const getReviewsByRecipe = (recipeId) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const deleteSingleReview = (reviewId) => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/reviews/${reviewId}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((data) => resolve(data))
+    .catch(reject);
+});
+
 export {
-  getSingleReview, createReview, updateReview, getReviewsByRecipe,
+  getSingleReview, createReview, updateReview, getReviewsByRecipe, deleteSingleReview,
 };

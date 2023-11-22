@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Button, Form } from 'react-bootstrap';
-// import PropTypes from 'prop-types';
 import { checkUser } from '../utils/auth';
 import getAllCategories from '../api/categoryData';
 import RegisterForm from '../components/RegisterForm';
@@ -29,8 +28,8 @@ function Home() {
   };
 
   const handleChange = (e) => {
-    if (e.target.value === '') {
-      getAllRecipes().then(setRecipes);
+    if (e.target.value === 'Select a Category') {
+      getAllRecipes();
     } else {
       getRecByCategory(e.target.value).then(setRecipes);
     }
@@ -59,7 +58,7 @@ function Home() {
                 className="mb-3"
                 value={recipes.categoryId}
               >
-                <option value="">Select a Category</option>
+                <option value="Select a Category">Select a Category</option>
                 {
             dropdowns.map((dropdown) => (
               <option

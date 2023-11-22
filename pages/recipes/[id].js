@@ -32,7 +32,6 @@ export default function ViewRecipeDetails({ onUpdate }) {
 
   useEffect(() => {
     getRecipe();
-    favoriteThisRecipe();
     checkUser(user.uid).then((data) => setAuthUser(data));
   }, []);
 

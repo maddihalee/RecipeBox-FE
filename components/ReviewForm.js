@@ -69,7 +69,7 @@ export default function ReviewForm({ onUpdate }) {
             </Form>
           </div>
           <div className="list-reviews">
-            {reviews?.map((review) => <ReviewBox onUpdate={getReviews} revObj={review} />)}
+            {reviews?.map((review) => <ReviewBox onUpdate={getReviews} revObj={review} setReviews={setReviews} />)}
           </div>
         </>
       ) : (

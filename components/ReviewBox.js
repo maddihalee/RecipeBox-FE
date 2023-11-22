@@ -1,12 +1,16 @@
 import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useAuth } from '../utils/context/authContext';
 import EditReviews from './EditReviewBox';
+import { deleteSingleReview } from '../api/reviewData';
 
 export default function ReviewBox({ revObj, onUpdate }) {
   const { user } = useAuth();
   const [showEditReviews, setShowEditReviews] = useState(false);
+  const router = useRouter();
+  const { id } = router.query;
 
   const handleEditClick = () => {
     setShowEditReviews(true);
@@ -15,6 +19,12 @@ export default function ReviewBox({ revObj, onUpdate }) {
   const anotherUpdate = () => {
     setShowEditReviews(false);
     onUpdate();
+  };
+
+  const deleteThisReview = () => {
+    if (window.confirm('Are you sure you want to delete this review?')) {
+      deleteSingleReview(revObj.id).then(router.push(`/recipes/${id}`));
+    }
   };
 
   return (
@@ -32,6 +42,12 @@ export default function ReviewBox({ revObj, onUpdate }) {
               onClick={handleEditClick}
               style={{ borderRadius: '30px', height: '40px', fontWeight: '600' }}
             >Edit Review
+            </Button>
+            <Button
+              type="submit"
+              onClick={deleteThisReview}
+              style={{ borderRadius: '30px', height: '40px', fontWeight: '600' }}
+            >Delete Review
             </Button>
           </div>
         )
