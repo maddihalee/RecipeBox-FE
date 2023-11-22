@@ -3,12 +3,13 @@ import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { updateReview } from '../api/reviewData';
 
-export default function EditReviews({ revObj, onUpdate }) {
+export default function EditReviews({ revObj }) {
   const [editReview, setEditReview] = useState('');
 
   const handleClick = (e) => {
     e.preventDefault();
-    updateReview(editReview).then(() => onUpdate());
+    updateReview(editReview).then(setEditReview);
+    window.location.reload(true);
   };
 
   useEffect(() => {
@@ -16,7 +17,7 @@ export default function EditReviews({ revObj, onUpdate }) {
   }, [revObj]);
 
   return (
-    <div className="d-flex flex-column" id="review-conainer" style={{ width: '1400px' }}>
+    <div className="d-flex flex-column" id="review-container" style={{ width: '1400px' }}>
       <Form onSubmit={handleClick} className="d-flex">
         <div className="d-flex" style={{ width: '1069px' }}>
           <Card.Img src={revObj.photoUrl} style={{ width: '50px' }} className="me-3 d-flex flex-column" />
@@ -53,7 +54,6 @@ EditReviews.propTypes = {
     recipeId: PropTypes.number,
     userId: PropTypes.number,
   }),
-  onUpdate: PropTypes.func,
 };
 
 EditReviews.defaultProps = {
@@ -62,5 +62,4 @@ EditReviews.defaultProps = {
     reviewString: '',
     userId: '',
   }),
-  onUpdate: () => {},
 };

@@ -14,9 +14,6 @@ function Home() {
   const [authUser, setAuthUser] = useState();
   const [dropdowns, setDropdowns] = useState([]);
   const [recipes, setRecipes] = useState([]);
-  // const [selectedOption, setSelectedOption] = useState('');
-  // const [usedata, setUseData] = useState([]);
-
   const getAllRecipes = () => {
     getRecipes().then(setRecipes);
   };
@@ -38,13 +35,6 @@ function Home() {
       getRecByCategory(e.target.value).then(setRecipes);
     }
   };
-
-  // const handleClick = (e) => {
-  //   e.preventDefault();
-  //   const filteredData = selectedOption === '' ? usedata
-  //     : usedata.filter((item) => item.category === selectedOption);
-
-  // };
 
   return (
     <>
