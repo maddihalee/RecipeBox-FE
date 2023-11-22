@@ -37,7 +37,7 @@ export default function ViewRecipeDetails({ onUpdate }) {
 
   return (
     <>
-      {authUser?.id === user[0]?.id ? (
+      {authUser?.firebaseUid === user[0]?.id ? (
         <div>
           <div className="d-flex justify-content-end mt-5 mb-0">
             <Link href={`/recipes/edit/${recipeDetails.id}`} passHref>
