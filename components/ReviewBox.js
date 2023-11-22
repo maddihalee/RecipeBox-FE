@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useAuth } from '../utils/context/authContext';
 import EditReviews from './EditReviewBox';
@@ -9,8 +8,6 @@ import { deleteSingleReview } from '../api/reviewData';
 export default function ReviewBox({ revObj, onUpdate }) {
   const { user } = useAuth();
   const [showEditReviews, setShowEditReviews] = useState(false);
-  const router = useRouter();
-  const { id } = router.query;
 
   const handleEditClick = () => {
     setShowEditReviews(true);
@@ -23,8 +20,9 @@ export default function ReviewBox({ revObj, onUpdate }) {
 
   const deleteThisReview = () => {
     if (window.confirm('Are you sure you want to delete this review?')) {
-      deleteSingleReview(revObj.id).then(router.push(`/recipes/${id}`));
+      deleteSingleReview(revObj.id).then(() => onUpdate());
     }
+    // window.location.reload(true);
   };
 
   return (

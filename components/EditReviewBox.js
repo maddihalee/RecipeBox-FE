@@ -3,15 +3,12 @@ import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { updateReview } from '../api/reviewData';
 
-export default function EditReviews({ revObj }) {
+export default function EditReviews({ revObj, onUpdate }) {
   const [editReview, setEditReview] = useState('');
 
   const handleClick = (e) => {
     e.preventDefault();
-    updateReview(editReview).then(setEditReview);
-    // setCount(count + 1);
-    // getReviewsByRecipe(id).then(setEditReview);
-    window.location.reload(true);
+    updateReview(editReview).then(() => onUpdate());
   };
 
   useEffect(() => {
@@ -56,6 +53,7 @@ EditReviews.propTypes = {
     recipeId: PropTypes.number,
     userId: PropTypes.number,
   }),
+  onUpdate: PropTypes.func,
 };
 
 EditReviews.defaultProps = {
@@ -64,4 +62,5 @@ EditReviews.defaultProps = {
     reviewString: '',
     userId: '',
   }),
+  onUpdate: () => {},
 };
