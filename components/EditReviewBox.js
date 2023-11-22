@@ -9,6 +9,8 @@ export default function EditReviews({ revObj }) {
   const handleClick = (e) => {
     e.preventDefault();
     updateReview(editReview).then(setEditReview);
+    // setCount(count + 1);
+    // getReviewsByRecipe(id).then(setEditReview);
     window.location.reload(true);
   };
 

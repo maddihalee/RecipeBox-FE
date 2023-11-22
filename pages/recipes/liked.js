@@ -9,6 +9,7 @@ export default function LikedRecipes() {
 
   const getFavorites = () => {
     getFavoriteRecipes(user[0].id).then(setFavoriteRecipes);
+    console.warn(user[0].id);
   };
 
   useEffect(() => {
