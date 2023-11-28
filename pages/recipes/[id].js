@@ -11,7 +11,7 @@ import { checkUser } from '../../utils/auth';
 
 export default function ViewRecipeDetails({ onUpdate }) {
   const [recipeDetails, setRecipeDetails] = useState([]);
-  const [authUser, setAuthUser] = useState();
+  const [, setAuthUser] = useState({});
   const { user } = useAuth();
   const router = useRouter();
   const { id } = router.query;
@@ -35,9 +35,13 @@ export default function ViewRecipeDetails({ onUpdate }) {
     checkUser(user.uid).then((data) => setAuthUser(data));
   }, []);
 
+  // console.warn('authUser:', authUser[0].id);
+  console.warn('userId:', user);
+  console.warn('recipeDetails:', recipeDetails.userId);
+
   return (
     <>
-      {authUser?.firebaseUid === user[0]?.id ? (
+      {recipeDetails?.userId === user[0].id ? (
         <div>
           <div className="d-flex justify-content-end mt-5 mb-0">
             <Link href={`/recipes/edit/${recipeDetails.id}`} passHref>

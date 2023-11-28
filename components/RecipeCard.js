@@ -11,14 +11,12 @@ export default function RecipeCard({ recipeObj }) {
     >
       <Link href={`/recipes/${recipeObj.id}`} passHref>
         <div className="d-flex justify-content-start" style={{ padding: '10px 10px 0px 10px', gap: '2rem' }}>
-          <Card.Img variant="top" src={recipeObj.imgUrl} alt="Recipe Picture" style={{ height: '200px' }} />
+          <Card.Img variant="top" src={recipeObj.imgUrl} alt="Recipe Picture" style={{ height: '200px', width: '250px' }} />
           <Card.Title className="align-self-center text-center fs-4">
             {recipeObj.name}
           </Card.Title>
         </div>
       </Link>
-      <hr className="m-3" />
-
     </Card>
   );
 }
@@ -32,5 +30,6 @@ RecipeCard.propTypes = {
     ingredients: PropTypes.string,
     imgUrl: PropTypes.string,
     categoryId: PropTypes.number,
+    userId: PropTypes.number,
   }).isRequired,
 };

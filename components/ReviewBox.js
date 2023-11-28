@@ -22,7 +22,6 @@ export default function ReviewBox({ revObj, onUpdate }) {
     if (window.confirm('Are you sure you want to delete this review?')) {
       deleteSingleReview(revObj.id).then(() => onUpdate());
     }
-    // window.location.reload(true);
   };
 
   return (

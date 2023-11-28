@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { createRecipe, updateRecipe } from '../api/recipeData';
 import getAllCategories from '../api/categoryData';
+import { useAuth } from '../utils/context/authContext';
 
 const initialState = {
   name: '',
@@ -17,6 +18,7 @@ export default function CreateRecipeForm({ recipeObj }) {
   const [formInput, setFormInput] = useState(initialState);
   const [category, setCategory] = useState([]);
   const router = useRouter();
+  const { user } = useAuth();
 
   useEffect(() => {
     getAllCategories().then(setCategory);
@@ -28,7 +30,8 @@ export default function CreateRecipeForm({ recipeObj }) {
     if (recipeObj.id) {
       updateRecipe(formInput).then(() => router.push(`/recipes/${recipeObj.id}`));
     } else {
-      createRecipe(formInput).then(() => router.push('/'));
+      const payload = { ...formInput, userId: user[0].id };
+      createRecipe(payload).then(() => router.push('/'));
     }
   };
 
@@ -136,5 +139,6 @@ CreateRecipeForm.propTypes = {
     ingredients: PropTypes.string,
     imgUrl: PropTypes.string,
     categoryId: PropTypes.number,
+    userId: PropTypes.number,
   }).isRequired,
 };
