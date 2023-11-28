@@ -26,7 +26,6 @@ const getSingleReview = (id) => new Promise((resolve, reject) => {
 });
 
 const updateReview = (payload) => new Promise((resolve, reject) => {
-  console.warn(payload);
   fetch(`${dbUrl}/reviews/${payload.id}`, {
     method: 'PUT',
     headers: {
