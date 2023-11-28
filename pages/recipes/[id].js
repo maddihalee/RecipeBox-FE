@@ -35,10 +35,6 @@ export default function ViewRecipeDetails({ onUpdate }) {
     checkUser(user.uid).then((data) => setAuthUser(data));
   }, []);
 
-  // console.warn('authUser:', authUser[0].id);
-  console.warn('userId:', user);
-  console.warn('recipeDetails:', recipeDetails.userId);
-
   return (
     <>
       {recipeDetails?.userId === user[0].id ? (

@@ -44,14 +44,14 @@ const createRecipe = (payload) => new Promise((resolve, reject) => {
 });
 
 const updateRecipe = (payload) => new Promise((resolve, reject) => {
-  fetch(`${dbUrl}/charity/${payload.id}`, {
+  fetch(`${dbUrl}/recipes/${payload.id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(payload),
   })
-    .then((response) => response.json())
+    .then((response) => response)
     .then((data) => resolve(data))
     .catch(reject);
 });
