@@ -1,8 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
-// import { clientCredentials } from './client';
-
-
+// import { clientCredentials } from './client'
 
 const checkUser = (uid) => new Promise((resolve, reject) => {
   fetch(`https://localhost:7007/checkuser/${uid}`, {
